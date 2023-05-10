@@ -52,6 +52,9 @@ const getRegisteredUsers = async (req, res, next) => {
   return res.status(200).json({ count: registeredUsers.rows[0].count });
 };
 
+const getId = async (req, res, next) => {
+  console.log("working");
+};
 const vote = async (req, res, next) => {
   const { fid } = req.body;
 
@@ -96,4 +99,5 @@ module.exports = {
   vote,
   getVotesCasted,
   getRecentRegistrations,
+  getId,
 };

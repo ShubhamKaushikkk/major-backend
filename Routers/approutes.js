@@ -6,4 +6,5 @@ router.get("/registeredusers", controller.getRegisteredUsers);
 router.post("/vote", controller.vote);
 router.get("/getvotes", controller.getVotesCasted);
 router.get("/recentregistrations", controller.getRecentRegistrations);
+router.get("/getId", controller.getId);
 module.exports = router;
