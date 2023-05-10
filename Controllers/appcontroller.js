@@ -54,15 +54,17 @@ const getRegisteredUsers = async (req, res, next) => {
 
 const getfingerprintId = async (req, res, next) => {
   console.log("working");
-  let registeredUsersq;
+  let userId;
   try {
-    registeredUsersq = await client.query("SELECT COUNT(*) FROM users");
+    userId = await client.query(
+      "SELECT adharNumber FROM users ORDER BY created_at DESC LIMIT 1"
+    );
   } catch (err) {
     return res
       .status(500)
-      .json({ message: "Failed to fetch registered users" });
+      .json({ message: "Failed to fetch registered users id" });
   }
-  console.log(registeredUsersq.rows[0].count);
+  console.log(userId.rows[0].count);
   return res.status(200).json({ count: registeredUsersq.rows[0].count });
 };
 const vote = async (req, res, next) => {
