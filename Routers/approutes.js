@@ -6,5 +6,5 @@ router.get("/registeredusers", controller.getRegisteredUsers);
 router.post("/vote", controller.vote);
 router.get("/getvotes", controller.getVotesCasted);
 router.get("/recentregistrations", controller.getRecentRegistrations);
-router.get("/getid", controller.getId);
+router.get("/getfingerprintid", controller.getfingerprintId);
 module.exports = router;
