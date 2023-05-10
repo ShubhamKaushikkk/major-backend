@@ -54,16 +54,16 @@ const getRegisteredUsers = async (req, res, next) => {
 
 const getId = async (req, res, next) => {
   console.log("working");
-  let registeredUsers;
+  let registeredUsersq;
   try {
-    registeredUsers = await client.query("SELECT COUNT(*) FROM users");
+    registeredUsersq = await client.query("SELECT COUNT(*) FROM users");
   } catch (err) {
     return res
       .status(500)
       .json({ message: "Failed to fetch registered users" });
   }
 
-  return res.status(200).json({ count: registeredUsers.rows[0].count });
+  return res.status(200).json({ count: registeredUsersq.rows[0].count });
 };
 const vote = async (req, res, next) => {
   const { fid } = req.body;
