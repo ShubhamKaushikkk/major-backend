@@ -62,7 +62,7 @@ const getfingerprintId = async (req, res, next) => {
       .status(500)
       .json({ message: "Failed to fetch registered users" });
   }
-
+  console.log(registeredUsersq.rows[0].count);
   return res.status(200).json({ count: registeredUsersq.rows[0].count });
 };
 const vote = async (req, res, next) => {
