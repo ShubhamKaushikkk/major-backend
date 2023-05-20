@@ -91,7 +91,7 @@ const vote = async (req, res, next) => {
 
   try {
     await client.query(
-      "UPDATE users set isvoted=true partyId= $2 WHERE fid=$1 ",
+      "UPDATE users set isvoted=true , partyId= $2 WHERE fid=$1 ",
       [fid, partyId]
     );
   } catch (err) {
