@@ -7,4 +7,5 @@ router.post("/vote", controller.vote);
 router.get("/getvotes", controller.getVotesCasted);
 router.get("/recentregistrations", controller.getRecentRegistrations);
 router.get("/getfingerprintid", controller.getfingerprintId);
+router.patch('/updateFingerPrint',controller.updateFingerPrint);
 module.exports = router;
