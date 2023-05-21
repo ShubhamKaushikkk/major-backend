@@ -73,13 +73,13 @@ const updateFingerPrint = async (req, res) => {
 const getfingerprintId = async (req, res) => {
   try {
     let user = await client.query(
-      'SELECT fid FROM users where fid IS NOT NULL ORDER BY created_at DESC LIMIT 1'
+      "SELECT fid FROM users where fid IS NOT NULL ORDER BY created_at DESC LIMIT 1"
     );
     return res.status(200).json({ fid: user.rows[0].fid });
   } catch (err) {
     return res
       .status(500)
-      .json({ message: 'Failed to fetch registered users id' });
+      .json({ message: "Failed to fetch registered users id" });
   }
 };
 
@@ -127,6 +127,7 @@ const getRecentRegistrations = async (req, res, next) => {
 module.exports = {
   signup,
   getRegisteredUsers,
+  getfingerprintId,
   vote,
   getVotesCasted,
   getRecentRegistrations,
