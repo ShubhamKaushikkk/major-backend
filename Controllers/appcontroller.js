@@ -130,9 +130,5 @@ module.exports = {
   vote,
   getVotesCasted,
   getRecentRegistrations,
-<<<<<<< HEAD
-  getfingerprintId,
-=======
->>>>>>> e7514ebf8ab70d1b5538cf1abac8a652a77b27c2
   updateFingerPrint,
 };
