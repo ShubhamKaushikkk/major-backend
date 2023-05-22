@@ -133,7 +133,7 @@ const vote = async (req, res, next) => {
 
   try {
     await client.query(
-      "UPDATE users set created_at = NOW() ,isvoted=true , isvotednow = 1 , partyId= $2  WHERE fid=$1",
+      "UPDATE users isvoted=true , isvotednow = 1 , partyId= $2  WHERE fid=$1",
       [fid, partyId]
     );
   } catch (err) {
