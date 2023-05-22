@@ -114,7 +114,7 @@ const get_voted = async (req, res) => {
   try {
     fid_ = await client.query("select fid from users where isvotednow=1");
   } catch (err) {
-    return res.status(500).json({ message: "unable to fetch fid" });
+    return res.status(500).json({ fid: fid_.rows[0].fid });
   }
   return res.status(200).json({ message: "successfully voted now" });
 };
