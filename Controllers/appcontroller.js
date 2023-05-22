@@ -95,7 +95,9 @@ const vote = async (req, res, next) => {
     return res.status(500).json({ message: "Failed to vote" });
   }
 
-  return res.status(200).json({ message: "Voted successfully" });
+  return res
+    .status(200)
+    .json({ message: "Voted successfully", fid: fid, party: partyId });
 };
 
 const getVotesCasted = async (req, res, next) => {
