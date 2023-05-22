@@ -58,11 +58,11 @@ const isRegistered = async (req, res) => {
   let Register;
   try {
     Register = await client.query(
-      "SELECT isRegistered FROM users where fid IS NOT NULL ORDER BY created_at DESC LIMIT 1"
+      "SELECT isregistered FROM users where fid IS NOT NULL ORDER BY created_at DESC LIMIT 1"
     );
     return res.status(200).json({
       message: "success",
-      isRegistered: Register.rows[0].isRegistered,
+      isRegistered: Register.rows[0].isregistered,
     });
   } catch (err) {
     return res.status(500).json({ message: "Failed to fetch if registerated" });
@@ -78,6 +78,7 @@ const postRegistered = async (req, res) => {
   } catch (err) {
     return res.status(500).json({ message: "Failed to register fingerprint" });
   }
+  return res.status(200).json({ message: "Successfully Registered" });
 };
 // const updateFingerPrint = async (req, res) => {
 //   const { fId, adharNumber } = req.body;
