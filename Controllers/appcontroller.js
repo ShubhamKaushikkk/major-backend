@@ -54,23 +54,45 @@ const getRegisteredUsers = async (req, res, next) => {
   return res.status(200).json({ count: registeredUsers.rows[0].count });
 };
 
-const updateFingerPrint = async (req, res) => {
-  const { fId, adharNumber } = req.body;
+const isRegistered = async (req, res) => {
+  let Register;
   try {
-    await client.query("update users set fid=$1 where adharNumber=$2", [
-      fId,
-      adharNumber,
-    ]);
+    Register = await client.query(
+      "SELECT isRegistered FROM users where fid IS NOT NULL ORDER BY created_at DESC LIMIT 1"
+    );
     return res
       .status(200)
-      .json({ message: "Finger print updated successfully" });
-  } catch (_error) {
-    console.error(_error);
-    return res
-      .status(500)
-      .json({ message: "Failed to update the finger print id" });
+      .json({ isRegistered: Register.rows[0].isRegistered });
+  } catch (err) {
+    return res.status(500).json({ message: "Failed to fetch if registerated" });
   }
 };
+
+const postRegistered = async (req, res) => {
+  let { fid } = req.body;
+  try {
+    await client.query("Update users set isRegistered=1  WHERE fid=$1", [fid]);
+  } catch (err) {
+    return res.status(500).json({ message: "Failed to register fingerprint" });
+  }
+};
+// const updateFingerPrint = async (req, res) => {
+//   const { fId, adharNumber } = req.body;
+//   try {
+//     await client.query("update users set fid=$1 where adharNumber=$2", [
+//       fId,
+//       adharNumber,
+//     ]);
+//     return res
+//       .status(200)
+//       .json({ message: "Finger print updated successfully" });
+//   } catch (_error) {
+//     console.error(_error);
+//     return res
+//       .status(500)
+//       .json({ message: "Failed to update the finger print id" });
+//   }
+// };
 
 const getfingerprintId = async (req, res) => {
   try {
@@ -135,5 +157,6 @@ module.exports = {
   vote,
   getVotesCasted,
   getRecentRegistrations,
-  updateFingerPrint,
+  isRegistered,
+  postRegistered,
 };
