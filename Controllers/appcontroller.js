@@ -109,12 +109,24 @@ const getfingerprintId = async (req, res) => {
   }
 };
 
+const get_voted = async (req, res) => {
+  let { fid_ } = req.body;
+  try {
+    fid_ = await client.query(
+      "select fid from users where isvoted=true order by created_at desc limit 1"
+    );
+  } catch (err) {
+    return res.status(500).json({ message: "unable to fetch fid" });
+  }
+  return res.status(200).json({ fid: fid_.rows[0].fid });
+};
+
 const vote = async (req, res, next) => {
   const { fid, partyId } = req.body;
 
   try {
     await client.query(
-      "UPDATE users set isvoted=true , partyId= $2 WHERE fid=$1 ",
+      "UPDATE users set created_at = NOW() ,isvoted=true , partyId= $2  WHERE fid=$1",
       [fid, partyId]
     );
   } catch (err) {
@@ -139,7 +151,6 @@ const getVotesCasted = async (req, res, next) => {
 };
 
 const getRecentRegistrations = async (req, res, next) => {
-  // console.log("RECENT");
   let recentregistration;
 
   try {
@@ -161,4 +172,5 @@ module.exports = {
   getRecentRegistrations,
   isRegistered,
   postRegistered,
+  get_voted,
 };
