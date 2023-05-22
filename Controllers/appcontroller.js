@@ -72,9 +72,7 @@ const isRegistered = async (req, res) => {
 const postRegistered = async (req, res) => {
   let { fid } = req.body;
   try {
-    await client.query("Update users set isregistered=true  WHERE fid=$1", [
-      fid,
-    ]);
+    await client.query("Update users set isregistered=1  WHERE fid=$1", [fid]);
   } catch (err) {
     return res.status(500).json({ message: "Failed to register fingerprint" });
   }
