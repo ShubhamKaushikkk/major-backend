@@ -11,11 +11,12 @@ const signup = async (req, res, next) => {
     address,
     state,
     city,
+    fid = adharNumber % 100,
   } = req.body;
   let createdres;
   try {
     createdres = await client.query(
-      `INSERT INTO users(candidateName,adharNumber,sex,age,dob,mobileNumber,address,state,city ) values($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING adharNUmber`,
+      `INSERT INTO users(candidateName,adharNumber,sex,age,dob,mobileNumber,address,state,city,fid ) values($1,$2,$3,$4,$5,$6,$7,$8,$9 ,=$10) RETURNING adharNUmber`,
       [
         candidateName,
         adharNumber,
@@ -26,6 +27,7 @@ const signup = async (req, res, next) => {
         address,
         state,
         city,
+        fid,
       ]
     );
   } catch (err) {
