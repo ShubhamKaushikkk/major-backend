@@ -27,7 +27,7 @@ const createDB = async () => {
         state varchar,
         city varchar,
         fid BIGINT,
-        isRegistered boolean,
+        isRegistered int,
         isvoted boolean default false,
         created_at TIMESTAMP DEFAULT NOW()
     )`
