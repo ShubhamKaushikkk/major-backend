@@ -121,12 +121,21 @@ const get_voted = async (req, res) => {
   return res.status(200).json({ fid: fid_.rows[0].fid });
 };
 
+const negVoted = async (req, res) => {
+  try {
+    await client.query("UPDATE users set isvotednow = 0");
+  } catch (err) {
+    return res.status(500).json({ message: "FAILED TO NEGVOTE" });
+  }
+  return res.status(200).json({ message: "Successful" });
+};
+
 const vote = async (req, res, next) => {
   const { fid, partyId } = req.body;
 
   try {
     await client.query(
-      "UPDATE users set created_at = NOW() ,isvoted=true , partyId= $2  WHERE fid=$1",
+      "UPDATE users set created_at = NOW() ,isvoted=true , isvotednow = 1 , partyId= $2  WHERE fid=$1",
       [fid, partyId]
     );
   } catch (err) {
@@ -173,4 +182,5 @@ module.exports = {
   isRegistered,
   postRegistered,
   get_voted,
+  negVoted,
 };
