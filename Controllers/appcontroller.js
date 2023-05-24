@@ -69,10 +69,22 @@ const isRegistered = async (req, res) => {
   }
 };
 
+const setRegisteredNow = async (req, res) => {
+  try {
+    await client.query("UPDATE users set isregisterednow = 0");
+  } catch (err) {
+    return res.status(500).json({ message: "FAILED TO negregister" });
+  }
+  return res.status(200).json({ message: "Successful" });
+};
+
 const postRegistered = async (req, res) => {
   let { fid } = req.body;
   try {
-    await client.query("Update users set isregistered=1  WHERE fid=$1", [fid]);
+    await client.query(
+      "Update users set isregistered=1 ,isregisterednow =1 WHERE fid=$1",
+      [fid]
+    );
   } catch (err) {
     return res.status(500).json({ message: "Failed to register fingerprint" });
   }
@@ -181,4 +193,5 @@ module.exports = {
   postRegistered,
   get_voted,
   negVoted,
+  setRegisteredNow,
 };

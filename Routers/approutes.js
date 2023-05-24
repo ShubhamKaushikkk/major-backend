@@ -11,5 +11,6 @@ router.get("/isRegistered", controller.isRegistered);
 router.post("/postRegistered", controller.postRegistered);
 router.get("/getVoted", controller.get_voted);
 router.post("/negVoted", controller.negVoted);
+router.post("/setRegisteredNow", controller.setRegisteredNow);
 // router.patch("/updateFingerPrint", controller.updateFingerPrint);
 module.exports = router;
