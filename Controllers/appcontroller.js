@@ -62,7 +62,7 @@ const isRegistered = async (req, res) => {
     );
     return res.status(200).json({
       message: "success",
-      isRegistered: Register.rows[0].isregistered,
+      isRegistered: Register.rows[0].isregisterednow,
     });
   } catch (err) {
     return res.status(500).json({ message: "Failed to fetch if registerated" });
