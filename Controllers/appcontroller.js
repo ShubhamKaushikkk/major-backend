@@ -58,7 +58,7 @@ const isRegistered = async (req, res) => {
   let Register;
   try {
     Register = await client.query(
-      "SELECT isregistered FROM users where fid IS NOT NULL ORDER BY created_at DESC LIMIT 1"
+      "SELECT isregisterednow FROM users where isregisterednow =1"
     );
     return res.status(200).json({
       message: "success",
